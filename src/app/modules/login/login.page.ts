@@ -18,7 +18,7 @@ export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
 
-    constructor(private router: Router,
+  constructor(private router: Router,
     private fb: FormBuilder,
     private loadingService: LoadingService,
     private userService: UserService,
@@ -31,17 +31,13 @@ export class LoginPage implements OnInit {
   }
 
   generateLoginForm = () => {
-    this.loginForm = new FormGroup({
-      userName: new FormControl(''),
-      password: new FormControl(''),
-    }) 
-    // this.loginForm = this.fb.group({
-    //   userName: ['', Validators.required],
-    //   password: ['', Validators.required]
-    // });
+    this.loginForm = this.fb.group({
+      userName: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
-  doLogin(loginForm:any) {
+  doLogin(loginForm: any) {
     this.apiService.doLogin(this.loginForm.value).subscribe((data) => {
       if (data) {
         console.log(data);
@@ -66,5 +62,16 @@ export class LoginPage implements OnInit {
         this.loadingService.hide();
         this.toast.error('Unable to validate user. Please try agian after sometime.');
       });
+  }
+
+  thisFormValid() {
+    if (this.loginForm.valid) {
+      return true
+    } else {
+      return false
     }
   }
+
+
+
+}

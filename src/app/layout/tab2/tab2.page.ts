@@ -6,7 +6,11 @@ import { NotificationService } from '../../services/notification.service';
 import { LoadingService } from '../../services/loading.service';
 import { UserService } from 'src/app/services/user.service';
 import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { AlertController } from "@ionic/angular";
 import * as moment from 'moment';
+import { Platform } from "@ionic/angular";
+import { SplashScreen } from "@ionic-native/splash-screen/ngx";
+import { StatusBar } from "@ionic-native/status-bar/ngx";
 
 @Component({
   selector: 'app-tab2',
@@ -34,14 +38,20 @@ export class Tab2Page implements OnInit {
     private router: Router,
     private apiService: ApiService,
     private toast: NotificationService,
+    public alertController: AlertController,
     private loadingService: LoadingService,
     private userService: UserService,
+    private platform: Platform,
+    private splashScreen: SplashScreen,
+    private statusBar: StatusBar,
     private fb: FormBuilder) {
     this.generateDetails();
     this.generateSignupForm();
+    this.generateLoginForm();
     this.generateCustomerForm();
     this.getCustomerDetail();
     this.generateProductCustomer();
+    this.initializeApp();
   }
   ngOnInit(): void {
   }
@@ -69,13 +79,24 @@ export class Tab2Page implements OnInit {
       // dateOfModified: [moment().format()]
     });
 
-    
+
   }
-  saveProductcustomerDetail(loginForm: any) {
-    this.apiService.insertProductCustomer(this.productCustomer.value).subscribe((data: any) => {
+  // saveProductcustomerDetail(loginForm: any) {
+  //   this.apiService.insertProductCustomer(this.productCustomer.value).subscribe((data: any) => {
+  //   });
+  //   this.modalController.dismiss();
+  //   this.getCustomerDetail();
+  // }
+
+  loginForm: FormGroup;
+  generateLoginForm = () => {
+    this.loginForm = this.fb.group({
+      productId: [this.productId],
+      customerId: [this.customerId],
+      createdBy: [this.currentUser],
+      dateOfCreated: [moment().format()],
     });
-    this.modalController.dismiss();
-    this.getCustomerDetail();
+
   }
 
   generateCustomerForm = () => {
@@ -98,7 +119,57 @@ export class Tab2Page implements OnInit {
       this.productId = data;
     })
   }
+  initializeApp() {
+    this.platform.ready().then(async () => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
+  }
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: "my-custom-class",
+      header: "Alert",
+      subHeader: "Subtitle",
+      message: "This is an alert message.",
+      buttons: ["OK"]
+    });
 
+    await alert.present();
+  }
+
+  async presentAlertConfirm(data: any) {
+    console.log(data, 'id')
+    this.userService.customer = data;
+    const alert = await this.alertController.create({
+      cssClass: "my-custom-class",
+      // header: "Add Customer!",
+      message: "Are you sure want to add customer?",
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+          cssClass: "secondary",
+          handler: blah => {
+            console.log("Confirm Cancel: blah");
+          }
+        },
+        {
+          text: "Okay",
+          handler: () => {
+            this.apiService.insertProductCustomer(this.loginForm.value).subscribe((data: any) => {
+              console.log(data, 'alert')
+            });
+            this.toast.success('Added Successfully');
+            location.reload();
+            this.router.navigate(['/tabs/tab2']);
+            console.log("Confirm Okay");
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 
   getCustomerDetails(data: any) {
     this.userService.customer = data;
@@ -199,4 +270,5 @@ export class Tab2Page implements OnInit {
       console.log(file, 'file')
     });
   }
+  
 }

@@ -31,15 +31,16 @@
 
 
 
-      <ion-input style="margin-top: 2rem;margin-bottom: 1rem;" required type='password' placeholder='Password' name='password'
-        formControlName='password'>
+      <ion-input style="margin-top: 2rem;margin-bottom: 1rem;" required type='password' placeholder='password'
+        name='password' formControlName='password'>
         <ion-icon name="lock-closed-outline"></ion-icon>
       </ion-input>
 
 
 
       <div class='ion-padding-top'>
-        <ion-button expand='block' type='submit' class='ion-no-margin btn-fill'>Login</ion-button>
+        <ion-button expand='block' type='submit' [disabled]="!thisFormValid()" class='ion-no-margin btn-fill'>Login
+        </ion-button>
       </div>
 
     </form>

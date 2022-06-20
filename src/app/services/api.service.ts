@@ -22,7 +22,14 @@ export class ApiService {
 
   constructor(private http: HttpClient) {
   }
-
+  logout = () => {
+    localStorage.removeItem('userName');
+    localStorage.removeItem('isSuperUser');
+    localStorage.removeItem('Role');
+    localStorage.removeItem('productId');
+    localStorage.removeItem('customerId');
+    localStorage.removeItem('productCustomerId');
+  }
 
   // getCustomerApiUrl = (endpoint: string) => {
   //   return `${environment.baseURL}/${this.CustomerApi}/${endpoint}`;
@@ -130,6 +137,10 @@ export class ApiService {
   paymentDetails = (params: any): Observable<any> => {
     const url = this.getPaymentApiUrl('PaymentDetails');
     return this.http.post(url, params);
+  }
+  getpaymentDetails = (): Observable<any> => {
+    const url = this.getPaymentApiUrl('AllpaymentDetails');
+    return this.http.get(url);
   }
   insertProductCustomer = (params: any): Observable<any> => {
     const url = this.getProductCustomerApiUrl('AddProductCustomerdetails');

@@ -16,7 +16,11 @@ const routes: Routes = [
     path: 'edit-entity',
     loadChildren: () => import('./modules/edit-entity/edit-entity.module').then(m => m.EditEntityPageModule),
     canActivate: [AuthGuardService]
+  },  {
+    path: 'tab5',
+    loadChildren: () => import('./layout/tab5/tab5.module').then( m => m.Tab5PageModule)
   }
+
 
 ];
 @NgModule({

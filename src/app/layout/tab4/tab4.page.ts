@@ -30,11 +30,9 @@ export class Tab4Page {
     this.getProductCustomer();
     this.getDetails();
     this.customerList()
-    this.getCustomerDetail();
-
-
-
+    this.getCustomerDetail();    
   }
+
   isStatus: boolean = true;
   productDetails: any;
   _data: any;
@@ -92,7 +90,7 @@ export class Tab4Page {
     this.paymentForm = this.fb.group({
       //paymentId:[''],
       productCustomerId: [this.PaymentId],
-      paymentType: ['' , Validators.required],
+      paymentType: ['', Validators.required],
       paymentDate: [moment().format()],
       paidAmount: ['', Validators.required],
       collectedBy: [this.currentUser],

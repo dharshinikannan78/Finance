@@ -1,0 +1,26 @@
+<h3 style="text-align: center;">PAYMENT LIST</h3>
+<ion-content>
+  <ion-grid>
+    <div *ngFor="let list of customerDetailsList;">
+      <div *ngFor="let _data of productDetails;">
+        <div *ngFor="let item of customerData;">
+          <div *ngFor="let data of allPaymentDetails;">
+            <div *ngIf="list.productId == _data.productId && list.customerId == item.customerId">
+              <div *ngIf="list.productCustomerId == data.productCustomerId">
+                <ion-card>
+                  <ion-card-content>
+                    Product Name - {{_data.productName}}<br />
+                    customer Name - {{item.customerName}}<br />
+                    Paid Amount - {{data.paidAmount}}<br />
+                    Collected By - {{data.collectedBy}}<br />
+                  </ion-card-content>
+                </ion-card>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-grid>
+</ion-content>

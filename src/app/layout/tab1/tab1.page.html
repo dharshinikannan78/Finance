@@ -1,16 +1,20 @@
 <ion-content class="ion-padding">
+    <ion-list-header>
+        <ion-label>Welcome {{ currentUser }} !!! </ion-label>
+        <ion-item lines="none">
+            <ion-button (click)="logout()" style="padding-right: 10px;" class="primary">
+                <ion-icon slot="start" name="log-out-outline"></ion-icon>
+                Logout
+            </ion-button>
+        </ion-item>
+    </ion-list-header>
     <ion-row class="ion-align-items-center">
-        <ion-col>
-            <h6 style="color: #001D6E; font-weight: 800;">Welcome {{ currentUser }} !!! </h6>
-        </ion-col>
         <ion-col class="ion-align-self-center">
-            <ion-button color="primary" style="float: right;" id="trigger">
+            <ion-button color="primary" id="trigger">
                 Add Product
             </ion-button>
         </ion-col>
     </ion-row>
-
-
     <ion-segment (ionChange)="segmentChanged($event)" value="list">
         <ion-segment-button value="Chit">
             <ion-label>
@@ -33,11 +37,7 @@
             </ion-label>
         </ion-segment-button>
     </ion-segment>
-
-
-
-
-    <ion-list class="animate__animated animate__slideInUp animate__fast" *ngIf="segment === 'Chit'">
+    <ion-list class="animate__animated animate__slideInUp animate__fast">
         <div *ngFor="let item of productDetails; let i = index;">
             <ion-card *ngIf="segment == item.productType">
                 <ion-item>
@@ -53,10 +53,10 @@
                         CREATED By {{ item.createdBy }}<br /></p>
                 </ion-card-content>
                 <ion-item>
-                    <ion-button fill="outline" slot="end">
+                    <ion-button fill="outline" (click)="getAllCustomerDetails(item.productId)" slot="end">
                         <ion-icon name="person-add"></ion-icon>
                     </ion-button>
-                    <ion-button fill="outline"  (click)="paymentDetails(item.productId)">
+                    <ion-button fill="outline" (click)="paymentDetails(item.productId)">
                         <ion-icon name="people"></ion-icon>
                     </ion-button>
                 </ion-item>
@@ -78,7 +78,7 @@
                         CREATED By {{ item.createdBy }}<br /></p>
                 </ion-card-content>
                 <ion-item>
-                    <ion-button fill="outline" slot="end">
+                    <ion-button fill="outline" slot="end" (click)="getAllCustomerDetails(item.productId)">
                         <ion-icon name="person-add"></ion-icon>
                     </ion-button>
                     <ion-button fill="outline" (click)="paymentDetails(item.productId)">
@@ -105,7 +105,7 @@
                         CREATED By {{ item.dateOfModified }}<br /></p>
                 </ion-card-content>
                 <ion-item>
-                    <ion-button fill="outline" slot="end" >
+                    <ion-button fill="outline" slot="end" (click)="getAllCustomerDetails(item.productId)">
                         <ion-icon name="person-add"></ion-icon>
                     </ion-button>
                     <ion-button fill="outline" (click)="paymentDetails(item.productId)">
@@ -173,8 +173,6 @@
         <ng-template>
             <div style="background-color: #001D6E;" class="app-header">
                 <h1 style="color: #fff; font-weight:800;">Add Product</h1>
-
-                <!-- <ion-icon name="close-outline"></ion-icon> -->
             </div>
 
             <ion-grid class="ion-no-margin scrollbar" id="style-1">

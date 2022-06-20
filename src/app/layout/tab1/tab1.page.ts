@@ -101,7 +101,10 @@ export class Tab1Page implements OnInit {
       return false
     }
   }
-
+  logout = () => {
+    this.apiService.logout();
+    this.router.navigate(['./login']);
+  }
   validateNumber(e) {
     const keyCode = e.keyCode;
     if (((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) && e.keyCode != 8) {
@@ -147,10 +150,19 @@ export class Tab1Page implements OnInit {
 
   segmentChanged(ev: any) {
     this.segment = ev.detail.value;
+    console.log(this.segment, 'seg')
   }
-  
+
   onclick(data) {
     this.isOpen == true;
     console.log(data, 'data')
   }
+  getAllCustomerDetails(data: any) {
+    console.log(data, 'id')
+    this.userService.Product = data;
+    this.router.navigate(['tabs/tab2']);
+  }
+  // ionViewWillEnter(data: any) {
+  //   this.paymentDetails(data);
+  // }
 }
