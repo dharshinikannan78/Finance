@@ -1,0 +1,81 @@
+<!-- <ion-content>
+  <div *ngFor="let list of customerDetailsList">
+    {{list.productId}}
+    {{list.customerId}}
+    <ion-button (click)=" payDetails(list.productCustomerId)">Pay</ion-button>
+    <div *ngFor="let _data of productDetails;">
+      <div *ngFor="let item of customerData;">
+        <div *ngIf="list.productId == _data.productId && list.customerId == item.customerId">
+          {{_data.productName}}
+          <br />
+          {{item.customerName}}
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+
+<div *ngFor="let data of productCustomer; let i = index">
+  <div *ngFor="let _data of productDetails;">
+    <div *ngFor="let item of customerData;">
+      <div *ngIf="data.productId == _data.productId && data.customerId == item.customerId">
+        {{_data.productName}}
+        {{item.customerName}}
+        <ion-button (click)=" payDetails(data.productCustomerId)">Pay</ion-button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <form (ngSubmit)='save(loginForm.value)' [formGroup]="loginForm">
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <ion-label position="stacked">Product Id</ion-label>
+            <ion-input type="text" formControlName="productId" disabled placeholder=""></ion-input>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <ion-label position="stacked">Customer Id</ion-label>
+            <ion-input type="text" formControlName="customerId" disabled placeholder=""></ion-input>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <ion-label position="stacked">Created By</ion-label>
+            <ion-input type="text" formControlName="createdBy" disabled placeholder=""></ion-input>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <ion-label position="stacked">Date On Creation</ion-label>
+            <ion-input type="text" formControlName="dateOfCreated" disabled placeholder=""></ion-input>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col>
+          <ion-button class="saveButton" color="tertiary" type="submit" [disabled]="!thisFormValid()">Save</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

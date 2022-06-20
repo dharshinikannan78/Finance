@@ -1,0 +1,78 @@
+<!-- <ion-content [fullscreen]="true">
+  <div class='login-card ion-padding'>
+    <form (ngSubmit)="doLogin(loginForm.value)" [formGroup]="loginForm">
+      <ion-item lines="none" style="margin-top: 3rem;">
+        <ion-label position="floating">Enter Username</ion-label>
+        <ion-input formControlName="userName" required type='text' placeholder='Username'></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="ion-margin-top">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" formControlName="password" placeholder='Password'></ion-input>
+      </ion-item>
+      <div style="margin-top: 3rem;">
+        <ion-button shape="round" expand="block" type="submit">Login</ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>  -->
+
+
+<ion-content [fullscreen]='true' padding>
+
+  <div class='login-card'>
+
+    <img slot='start' style="margin-top: 2rem;margin-bottom: 2rem;" src='../../../assets/icon/images.png' />
+
+
+    <form (ngSubmit)='doLogin(loginForm.value)' [formGroup]='loginForm' padding>
+      <ion-input required type='text' placeholder='UserName' name='userName' formControlName='userName'>
+        <ion-icon name='person-outline'></ion-icon>
+      </ion-input>
+
+
+
+      <ion-input style="margin-top: 2rem;margin-bottom: 1rem;" required type='password' placeholder='Password' name='password'
+        formControlName='password'>
+        <ion-icon name="lock-closed-outline"></ion-icon>
+      </ion-input>
+
+
+
+      <div class='ion-padding-top'>
+        <ion-button expand='block' type='submit' class='ion-no-margin btn-fill'>Login</ion-button>
+      </div>
+
+    </form>
+  </div>
+
+
+</ion-content>
+
+<!-- <ion-content [fullscreen]='true' padding>
+
+
+  <div class='login-card'>
+    
+    
+    <img slot='start' src='../../../assets/icon/favicon.png' />
+    
+
+    <form  [formGroup]="loginForm">
+
+      <ion-input formControlName="username" required type='text' placeholder='Username' >
+        <ion-icon name='person-sharp'></ion-icon>
+      </ion-input>
+
+      <ion-input style="margin-block-start: 1rem" formControlName="password"  placeholder='Password'>
+        <ion-icon name='lock-closed-sharp'></ion-icon>
+      </ion-input>
+      <div style="margin-block-start: 1rem; float:inline-end">
+        <ion-button (click)="doLogin()" type="submit" >Login</ion-button>
+      </div>
+
+
+    </form>
+  </div> 
+
+
+</ion-content>  -->
